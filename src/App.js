@@ -1,18 +1,24 @@
 import React from 'react';
 
 import {combineReducers, createStore} from 'redux';
-import * as reducers from './state/reducers'
+import * as reducers from './state/reducers';
+
+import * as actionCreators from './state/actionCreators';
 
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
+import  {connect} from 'react-redux';
+
 
 //Combine All reducers into monsterReducer ( 4 dreadfort)
 
+//declare your slices of state : carDetails, shop, cost
+
 const monsterReducer = combineReducers({
-  delete : reducers.removeFeatureReducer,
-  add: reducers.buyReducer
+  // delete : reducers.removeFeatureReducer,
+  state: reducers.carReducer
 });
 
 
@@ -25,48 +31,29 @@ export const store = createStore(
 )
 //app renders everything
 
-const App = () => {
-  //state is one gigantic object 
-  //contains <additional price> <car> <store> 
-
-  const state = {
-    additionalPrice: 0,
-    car: {
-      price: 26395,
-      name: '2019 Ford Mustang',
-      image:
-        'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
-      features: []
-    },
-    store: [
-      { id: 1, name: 'V-6 engine', price: 1500 },
-      { id: 2, name: 'Racing detail package', price: 1500 },
-      { id: 3, name: 'Premium sound system', price: 500 },
-      { id: 4, name: 'Rear spoiler', price: 250 }
-    ]
-  };
-
-  //TYPES OF ACTIONS THE STATE MIGHT SUFFER 
-  const removeFeature = item => {
-    // dispatch an action here to remove an item
-  };
-
-  const buyItem = item => {
-    // dipsatch an action here to add an item
-  };
-
+export const App = ({state,removeFeature, addFeature}) => {
+ 
   return (
     <div className="boxes">
       <div className="box">
         <Header car={state.car} />
-        <AddedFeatures car={state.car} />
+        <AddedFeatures removeFeature={removeFeature} car={state.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures store={state.store} />
+        <AdditionalFeatures addFeature ={addFeature} store={state.store} />
         <Total car={state.car} additionalPrice={state.additionalPrice} />
       </div>
     </div>
   );
 };
 
-export default App;
+export  default connect (
+  
+    //export a connected verion of a component (8 bear island)
+  
+    state => state, 
+    //plug the actionCreators into the component (9 shadow tower)
+    actionCreators,)(App);
+  
+  
+
