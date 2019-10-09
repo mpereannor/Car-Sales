@@ -1,10 +1,28 @@
 import React from 'react';
 
+import {combineReducers, createStore} from 'redux';
+import * as reducers from './state/reducers'
+
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 
+//Combine All reducers into monsterReducer ( 4 dreadfort)
+
+const monsterReducer = combineReducers({
+  delete : reducers.removeReducer,
+  add: reducers.buyReducer
+});
+
+
+//Use createStore to create a Redux Store (5 white harbour)
+
+export const store = createStore(
+  monsterReducer,
+  //chrome redux devtools
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 //app renders everything
 
 const App = () => {
