@@ -11,7 +11,7 @@ import Total from './components/Total';
 //Combine All reducers into monsterReducer ( 4 dreadfort)
 
 const monsterReducer = combineReducers({
-  delete : reducers.removeReducer,
+  delete : reducers.removeFeatureReducer,
   add: reducers.buyReducer
 });
 
