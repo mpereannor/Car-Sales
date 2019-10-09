@@ -5,7 +5,12 @@ import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 
+//app renders everything
+
 const App = () => {
+  //state is one gigantic object 
+  //contains <additional price> <car> <store> 
+
   const state = {
     additionalPrice: 0,
     car: {
@@ -23,6 +28,7 @@ const App = () => {
     ]
   };
 
+  //TYPES OF ACTIONS THE STATE MIGHT SUFFER 
   const removeFeature = item => {
     // dispatch an action here to remove an item
   };
